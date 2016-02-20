@@ -1,6 +1,6 @@
-class CreateParticipants < ActiveRecord::Migration
+class CreateParticipations < ActiveRecord::Migration
   def change
-    create_table :participants do |t|
+    create_table :participations do |t|
       t.integer :player_id
       t.integer :game_id
       t.integer :score
