@@ -1,7 +1,7 @@
 class Player < ActiveRecord::Base
   has_many :participations
   has_many :games, through: :participations
-  
+
   validates :name, presence: true
 
   validates :email, format: {
@@ -21,7 +21,7 @@ class Player < ActiveRecord::Base
     greater_than_or_equal_to: 0,
     less_than_or_equal_to: 100,
     message: 'should be between 0 and 100'
-  }
+  }, allow_nil: true
 
   def update_score
     # Do something here
