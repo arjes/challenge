@@ -10,18 +10,18 @@
     = f.label :date
     = f.date_select :date
 
-  table
+  table.participants_table
     tr
       td Remove Player
       td Player Name
       td Score
     = f.fields_for :participations do |participation_form|
-      tr
-        td
-          =participation_form.check_box :_destroy, checked_value: 1, unchecked_value: "0"
-        td
-          =participation_form.object.player.try(:name)
-        td
-          =participation_form.label :score
-          =participation_form.number_field :score
+      =render "participation_fields", f: participation_form
+
+
+  = link_to_add_fields "Add Participant", f, :participations
+  =select_tag "all_players",
+    options_from_collection_for_select(Player.all, "id", "name"), include_blank: true
+
+
   .actions = f.submit

@@ -1,0 +1,9 @@
+tr
+  td
+    =f.check_box :_destroy, checked_value: 1, unchecked_value: "0"
+    =f.hidden_field :player_id
+  td.playerName
+    =f.object.player.try(:name)
+  td
+    =f.label :score
+    =f.number_field :score
