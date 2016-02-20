@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Player:
+  = @participant.player_id
+p
+  strong Game:
+  = @participant.game_id
+p
+  strong Score:
+  = @participant.score
+
+= link_to 'Edit', edit_participant_path(@participant)
+'|
+= link_to 'Back', participants_path
