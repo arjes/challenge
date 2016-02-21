@@ -14,5 +14,5 @@
     = f.text_field :email
   .field
     = f.label :hand
-    = f.text_field :hand
+    = f.select :hand, ['Left', 'Right']
   .actions = f.submit

@@ -4,8 +4,8 @@ RSpec.describe "players/show", type: :view do
   before(:each) do
     @player = assign(:player, Player.create!(
       :name => "Name",
-      :email => "Email",
-      :hand => "Hand",
+      :email => "qwer@asadf",
+      :hand => "Right",
       :grade => 1
     ))
   end

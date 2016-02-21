@@ -15,7 +15,7 @@ class Player < ActiveRecord::Base
   }
 
   validates :hand, inclusion: {
-    in: %w(left right),
+    in: %w(Left Right),
     message: "'%{value}' is not a valid, please select right or left"
   }
 
@@ -25,10 +25,17 @@ class Player < ActiveRecord::Base
     message: 'should be between 0 and 100'
   }, allow_nil: true
 
+  def points_scored
+    participations.sum(:score)
+  end
+
+  def total_game_points
+    participations_of_all_games.sum(:score)
+  end
+
   def update_grade
     # Score is Points Scored / Total of all points in all games
-    self.grade = 100 *
-            participations.sum(:score).to_f / participations_of_all_games.sum(:score)
+    self.grade = (100 * points_scored.to_f / total_game_points).floor
   end
 
   def update_grade!
