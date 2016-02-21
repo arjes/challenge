@@ -1,20 +1,24 @@
-h1 Listing games
+.page-header
+  h1 Listing games
 
-table
+table.table.table-striped
   thead
     tr
-      th Date
       th
-      th
-      th
-
+      th Game Date
+      th # Players
   tbody
     - @games.each do |game|
       tr
+        td
+          = link_to game, class: 'action-link' do
+            span.glyphicon.glyphicon-search
+          = link_to edit_game_path(game), class: 'action-link'  do
+            span.glyphicon.glyphicon-edit
+          = link_to game, class: 'action-link', data: {:confirm => 'Are you sure?'}, method: :delete do
+            span.glyphicon.glyphicon-remove
         td = game.date
-        td = link_to 'Show', game
-        td = link_to 'Edit', edit_game_path(game)
-        td = link_to 'Destroy', game, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = game.players.count
 
 br
 

@@ -1,9 +1,24 @@
-p#notice = notice
+.page-header
+  h1
+    'Viewing game
+    small
+      'Played on
+      = @game.date
 
-p
-  strong Date:
-  = @game.date
-
+.row
+  .col-sm-12
+    table.participants_table.table.table-striped
+      thead
+        tr
+          th Player Name
+          th Player Grade
+          th Score
+      tbody
+        - @game.participations.order(score: :desc).each do |participation|
+          tr
+            td=participation.player.name
+            td=participation.player.grade
+            td=participation.score
 = link_to 'Edit', edit_game_path(@game)
 '|
 = link_to 'Back', games_path

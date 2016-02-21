@@ -23,7 +23,7 @@ $ ->
       time = new Date().getTime()
       regexp = new RegExp($(this).data('id'), 'g')
 
-      $('.participants_table').append($(this).data('fields').replace(regexp, time))
+      $('.participants_table tbody').append($(this).data('fields').replace(regexp, time))
 
       # Update player name
       last_row = $('.participants_table tr').last()

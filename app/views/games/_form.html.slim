@@ -1,4 +1,4 @@
-= form_for @game do |f|
+= form_for @game, html_options: { class: 'form-horizontal' } do |f|
   - if @game.errors.any?
     #error_explanation
       h2 = "#{pluralize(@game.errors.count, "error")} prohibited this game from being saved:"
@@ -6,22 +6,37 @@
         - @game.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :date
-    = f.date_select :date
+  .form-group.row
+    = f.label :date, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.date_select :date
 
-  table.participants_table
-    tr
-      td Remove Player
-      td Player Name
-      td Score
-    = f.fields_for :participations do |participation_form|
-      =render "participation_fields", f: participation_form
+  .form-group.row
+    = f.label :Players, class: 'col-sm-2 control-label'
 
+    .col-sm-10
+      table.participants_table.table.table-striped
+        thead
+          tr
+            th
+            th Player Name
+            th Score
+        tbody
+          = f.fields_for :participations do |participation_form|
+            =render "participation_fields", f: participation_form
 
-  = link_to_add_fields "Add Participant", f, :participations
-  =select_tag "all_players",
-    options_from_collection_for_select(Player.all, "id", "name"), include_blank: true
+  .row
+    .col-sm-2
+    label.col-sm-2.control-label
+      =link_to_add_fields f, :participations do
+        | Add Participant
+        span.glyphicon.glyphicon-plus
+    .col-sm-8
+      // Maybe not valid, but works in chrome
+      =select_tag "all_players",
+        options_from_collection_for_select(Player.all, "id", "name"),
+        include_blank: true, class: 'form-control'
 
-
-  .actions = f.submit
+  .row
+    .col-md-12
+      = f.submit class: 'btn btn-primary'
